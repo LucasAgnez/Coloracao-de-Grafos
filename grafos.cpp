@@ -62,6 +62,8 @@ public:
 	}
  
 	void adiciona_aresta(Vertice *u, Vertice *v);
+
+	void adiciona_vertice(Vertice *u);
  
 	void colore_grafo();
 	
@@ -87,7 +89,7 @@ void Grafo::adiciona_aresta(Vertice *u, Vertice *v){
 	}
 	vertices[u->indice] = u;
 	vertices[v->indice] = v;
-	cout << "\tAdicionado: (" << u->indice << ", " << v->indice << ")"<< endl;
+	cout << "\tAresta Adicionada: (" << u->indice << ", " << v->indice << ")"<< endl;
 	if(u == v){
 		adjacentes[u->indice].push_back(v);
 		u->grau++;
@@ -97,6 +99,15 @@ void Grafo::adiciona_aresta(Vertice *u, Vertice *v){
 	u->grau++;
 	adjacentes[v->indice].push_back(u);
 	v->grau++;
+}
+
+void Grafo::adiciona_vertice(Vertice *u){
+	if (u->indice >= n){
+		cout << "\tERRO: \t Indice do vertice fora dos limites (" << u->indice  << ")" << "\tLimite: " << n-1 << endl;
+		return;
+	}
+	vertices[u->indice] = u;
+	cout << "\tVértice Adicionado: (" << u->indice << ")"<< endl;
 }
  
 bool Grafo::eh_pseudografo(){
@@ -109,6 +120,7 @@ bool Grafo::eh_pseudografo(){
 		}
 	}
 	return false;
+	cout << "a" << endl;
 }
 
 void Grafo::calcula_saturacao(){
@@ -195,36 +207,36 @@ void Grafo::imprime_lista_colorida(){
 int main(){
 	cout << "##################################################################" << endl;
     cout << "GRAFO 0:" << endl;
-	Vertice v0(0);
-	Vertice v1(1);
-	Vertice v2(2);
-	Vertice v3(3);
-	Vertice v4(4);
-	Vertice v5(5);
-	Vertice v6(6);
-	Grafo G(7);
-	G.adiciona_aresta(&v0, &v1);
-	G.adiciona_aresta(&v0, &v2);
-	G.adiciona_aresta(&v0, &v3);
-	G.adiciona_aresta(&v0, &v4);
-	G.adiciona_aresta(&v0, &v5);
-	G.adiciona_aresta(&v0, &v6);
-	G.adiciona_aresta(&v1, &v2);
-	G.adiciona_aresta(&v1, &v3);
-	G.adiciona_aresta(&v1, &v4);
-	G.adiciona_aresta(&v1, &v5);
-	G.adiciona_aresta(&v1, &v6);
-	G.adiciona_aresta(&v2, &v3);
-	G.adiciona_aresta(&v2, &v4);
-	G.adiciona_aresta(&v2, &v5);
-	G.adiciona_aresta(&v2, &v6);
-	G.adiciona_aresta(&v3, &v4);
-	G.adiciona_aresta(&v3, &v5);
-	G.adiciona_aresta(&v3, &v6);
-	G.adiciona_aresta(&v4, &v5);
-	G.adiciona_aresta(&v4, &v6);
-	G.adiciona_aresta(&v5, &v6);
-	G.colore_grafo();
+	Vertice G0v0(0);
+	Vertice G0v1(1);
+	Vertice G0v2(2);
+	Vertice G0v3(3);
+	Vertice G0v4(4);
+	Vertice G0v5(5);
+	Vertice G0v6(6);
+	Grafo G0(7);
+	G0.adiciona_aresta(&G0v0, &G0v1);
+	G0.adiciona_aresta(&G0v0, &G0v2);
+	G0.adiciona_aresta(&G0v0, &G0v3);
+	G0.adiciona_aresta(&G0v0, &G0v4);
+	G0.adiciona_aresta(&G0v0, &G0v5);
+	G0.adiciona_aresta(&G0v0, &G0v6);
+	G0.adiciona_aresta(&G0v1, &G0v2);
+	G0.adiciona_aresta(&G0v1, &G0v3);
+	G0.adiciona_aresta(&G0v1, &G0v4);
+	G0.adiciona_aresta(&G0v1, &G0v5);
+	G0.adiciona_aresta(&G0v1, &G0v6);
+	G0.adiciona_aresta(&G0v2, &G0v3);
+	G0.adiciona_aresta(&G0v2, &G0v4);
+	G0.adiciona_aresta(&G0v2, &G0v5);
+	G0.adiciona_aresta(&G0v2, &G0v6);
+	G0.adiciona_aresta(&G0v3, &G0v4);
+	G0.adiciona_aresta(&G0v3, &G0v5);
+	G0.adiciona_aresta(&G0v3, &G0v6);
+	G0.adiciona_aresta(&G0v4, &G0v5);
+	G0.adiciona_aresta(&G0v4, &G0v6);
+	G0.adiciona_aresta(&G0v5, &G0v6);
+	G0.colore_grafo();
 	cout << endl << "##################################################################" << endl;
 	cout << "GRAFO 1:" << endl;
 
@@ -263,7 +275,8 @@ int main(){
 	Vertice G2v6(6);
 	Vertice G2v7(7);
 	Vertice G2v8(8);
-	Grafo G2(9);
+	Vertice G2v9(9);
+	Grafo G2(10);
 	G2.adiciona_aresta(&G2v0, &G2v1);
 	G2.adiciona_aresta(&G2v0, &G2v5);
 	G2.adiciona_aresta(&G2v2, &G2v3);
@@ -273,8 +286,8 @@ int main(){
 	G2.adiciona_aresta(&G2v6, &G2v5);
 	G2.adiciona_aresta(&G2v6, &G2v7);
 	G2.adiciona_aresta(&G2v8, &G2v1);
+	G2.adiciona_vertice(&G2v9);
 	G2.colore_grafo();
-
 
 	return 1;
 }
