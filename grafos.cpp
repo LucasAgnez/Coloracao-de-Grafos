@@ -3,6 +3,7 @@
 #include <set>
 #include <vector>
 #include <string>
+#include <sstream>
 
 using namespace std;
  
@@ -205,24 +206,44 @@ void Grafo::imprime_lista_colorida(){
 	}
 }
 
-void carrega_grafo(char[] nome){
-	ifstream arquivo;
+void carrega_grafo(char** nome){
+	ifstream arquivo;	
 	arquivo.open(nome, ios::in);
+	vector<Vertice*> v;
 	if(arquivo.is_open()){
 		string linha;
+		string lixo;
+		int num_vert;
+		int id_vert1;
+		int id_vert2;		
+		stringstream stream;
 		while(getline(arquivo, linha)){
-			if (line.size() == 0) {
+			if (linha.size() == 0) {
       			continue;
       		}
-      		if(line.find("c")!= string::npos){
+      		if(linha.find("c")!= string::npos){
       			continue;
       		}
-      		if(line.find("p")!= string::npos){
-      			stringstream stream;
-      			
+      		if(linha.find("p")!= string::npos){
+      			stream << linha;
+      			stream >> lixo;
+      			stream >> lixo;
+      			stream >> num_vert;
+      			stream >> lixo;
+      			for(int i = 0; i < num_vert; i++){
+      				Vertice vert(i);
+      				v[i].push_back(&vert);
+      			}
       		}
-      		if(line.find("e")!= string::npos){
-      			
+  			Grafo Grafo(num_vert);
+      		if(linha.find("e")!= string::npos){
+      			stream << linha;
+      			stream >> lixo;
+      			stream >> id_vert1;
+      			stream >> id_vert2;
+      			id_vert1--;
+      			id_vert2--;
+      			Grafo.adiciona_aresta(&v[id_vert1], &v[id_vert2]);
       		}
 
 		}
@@ -230,7 +251,7 @@ void carrega_grafo(char[] nome){
 	arquivo.close();
 }
 
-int main(){
+int main(int argc, char** argv){
 	cout << "##################################################################" << endl;
     cout << "GRAFO 0:" << endl;
 	Vertice G0v0(0);
