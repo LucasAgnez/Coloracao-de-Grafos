@@ -103,8 +103,8 @@ void Grafo::calcula_saturacao(){
 }
 
 void Grafo::colore_grafo(){
-  time_t start, end;
-  time(&start);
+  auto inicio = chrono::high_resolution_clock::now();
+  
   ios_base::sync_with_stdio(false);
 	if(!eh_pseudografo()){
 		while(true){
@@ -132,12 +132,14 @@ void Grafo::colore_grafo(){
 				}
 			}
 		}
-    time(&end);
+    auto fim = chrono::high_resolution_clock::now();
 	//imprime_lista_colorida();
     imprime_vertices();
-    double time_taken = double(end - start);
+    double tempo = 
+      chrono::duration_cast<chrono::nanoseconds>(fim - inicio).count();
+    tempo *= 1e-9;
     cout << "Tempo para colorir o grafo: " << fixed
-         << time_taken << setprecision(7);
+         << tempo << setprecision(9);
     cout << " seg " << endl;
 	}	
 }
