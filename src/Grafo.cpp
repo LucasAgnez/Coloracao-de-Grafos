@@ -2,7 +2,15 @@
 
 using namespace std;
 
-Grafo::Grafo(string nome_arquivo){
+Grafo::Grafo(int argc, char **arg){
+  if(argc != 2){
+    cout << "USO: ./grafos <nome_do_arquivo>" << endl;
+  }
+  string nome_arquivo;
+  stringstream s;
+  s << arg[1];
+  s >> nome_arquivo;
+  nome_arquivo = "../data/" + nome_arquivo;
   carrega_grafo(nome_arquivo);
   //imprime_lista();
   colore_grafo();
