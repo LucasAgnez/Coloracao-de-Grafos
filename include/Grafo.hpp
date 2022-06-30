@@ -18,7 +18,7 @@ private:
 
   public:
 
-	Grafo(std::string nome_arquivo);
+	Grafo(int argc, char **arg);
 	
   ~Grafo();
 
