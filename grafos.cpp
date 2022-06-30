@@ -1,6 +1,8 @@
 #include <iostream>
+#include <fstream>
 #include <set>
 #include <vector>
+#include <string>
 
 using namespace std;
  
@@ -166,8 +168,7 @@ void Grafo::colore_grafo(){
 		}
 	imprime_vertices();
 	imprime_lista_colorida();
-	}
-	
+	}	
 }
 
 void Grafo::imprime_lista(){
@@ -203,7 +204,32 @@ void Grafo::imprime_lista_colorida(){
 		cout << endl;
 	}
 }
- 
+
+void carrega_grafo(char[] nome){
+	ifstream arquivo;
+	arquivo.open(nome, ios::in);
+	if(arquivo.is_open()){
+		string linha;
+		while(getline(arquivo, linha)){
+			if (line.size() == 0) {
+      			continue;
+      		}
+      		if(line.find("c")!= string::npos){
+      			continue;
+      		}
+      		if(line.find("p")!= string::npos){
+      			stringstream stream;
+      			
+      		}
+      		if(line.find("e")!= string::npos){
+      			
+      		}
+
+		}
+	}
+	arquivo.close();
+}
+
 int main(){
 	cout << "##################################################################" << endl;
     cout << "GRAFO 0:" << endl;
