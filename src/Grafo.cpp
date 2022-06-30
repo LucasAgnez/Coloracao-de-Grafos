@@ -10,7 +10,7 @@ Grafo::Grafo(int argc, char **arg){
   stringstream s;
   s << arg[1];
   s >> nome_arquivo;
-  nome_arquivo = "../data/" + nome_arquivo;
+  nome_arquivo = "data/" + nome_arquivo;
   carrega_grafo(nome_arquivo);
   //imprime_lista();
   colore_grafo();
