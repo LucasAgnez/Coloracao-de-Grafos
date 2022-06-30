@@ -54,16 +54,15 @@ public:
 	vector<Vertice*> vertices;
 	vector<vector<Vertice*>> adjacentes;
  
-	Grafo(int n_vertices){
-		n = n_vertices;
-		vertices.resize(n);
-		adjacentes.resize(n, vector<Vertice*>());
+	Grafo(string nome_arquivo){
+		carrega_grafo(nome_arquivo);
 	}
 	~Grafo() { 
 		adjacentes.clear(); 
 		vertices.clear();
 	}
- 
+	void carrega_grafo(string nome_arquivo);
+
 	void adiciona_aresta(Vertice *u, Vertice *v);
 
 	void adiciona_vertice(Vertice *u);
@@ -206,10 +205,9 @@ void Grafo::imprime_lista_colorida(){
 	}
 }
 
-void carrega_grafo(char** nome){
-	ifstream arquivo;	
-	arquivo.open(nome, ios::in);
-	vector<Vertice*> v;
+void Grafo::carrega_grafo(string nome_arquivo){
+	fstream arquivo;	
+	arquivo.open(nome_arquivo, ios::in);
 	if(arquivo.is_open()){
 		string linha;
 		string lixo;
@@ -230,12 +228,14 @@ void carrega_grafo(char** nome){
       			stream >> lixo;
       			stream >> num_vert;
       			stream >> lixo;
+      			n = num_vert
+      			vertices.resize(n);
+				adjacentes.resize(n, vector<Vertice*>());
       			for(int i = 0; i < num_vert; i++){
       				Vertice vert(i);
-      				v[i].push_back(&vert);
+      				adiciona_vertice(&vert);
       			}
       		}
-  			Grafo Grafo(num_vert);
       		if(linha.find("e")!= string::npos){
       			stream << linha;
       			stream >> lixo;
@@ -243,7 +243,7 @@ void carrega_grafo(char** nome){
       			stream >> id_vert2;
       			id_vert1--;
       			id_vert2--;
-      			Grafo.adiciona_aresta(&v[id_vert1], &v[id_vert2]);
+      			adiciona_aresta(vertices[id_vert1], vertices[id_vert2]);
       		}
 
 		}
@@ -252,89 +252,6 @@ void carrega_grafo(char** nome){
 }
 
 int main(int argc, char** argv){
-	cout << "##################################################################" << endl;
-    cout << "GRAFO 0:" << endl;
-	Vertice G0v0(0);
-	Vertice G0v1(1);
-	Vertice G0v2(2);
-	Vertice G0v3(3);
-	Vertice G0v4(4);
-	Vertice G0v5(5);
-	Vertice G0v6(6);
-	Grafo G0(7);
-	G0.adiciona_aresta(&G0v0, &G0v1);
-	G0.adiciona_aresta(&G0v0, &G0v2);
-	G0.adiciona_aresta(&G0v0, &G0v3);
-	G0.adiciona_aresta(&G0v0, &G0v4);
-	G0.adiciona_aresta(&G0v0, &G0v5);
-	G0.adiciona_aresta(&G0v0, &G0v6);
-	G0.adiciona_aresta(&G0v1, &G0v2);
-	G0.adiciona_aresta(&G0v1, &G0v3);
-	G0.adiciona_aresta(&G0v1, &G0v4);
-	G0.adiciona_aresta(&G0v1, &G0v5);
-	G0.adiciona_aresta(&G0v1, &G0v6);
-	G0.adiciona_aresta(&G0v2, &G0v3);
-	G0.adiciona_aresta(&G0v2, &G0v4);
-	G0.adiciona_aresta(&G0v2, &G0v5);
-	G0.adiciona_aresta(&G0v2, &G0v6);
-	G0.adiciona_aresta(&G0v3, &G0v4);
-	G0.adiciona_aresta(&G0v3, &G0v5);
-	G0.adiciona_aresta(&G0v3, &G0v6);
-	G0.adiciona_aresta(&G0v4, &G0v5);
-	G0.adiciona_aresta(&G0v4, &G0v6);
-	G0.adiciona_aresta(&G0v5, &G0v6);
-	G0.colore_grafo();
-	cout << endl << "##################################################################" << endl;
-	cout << "GRAFO 1:" << endl;
-
-    Vertice G1v0(0);
-	Vertice G1v1(1);
-	Vertice G1v2(2);
-	Vertice G1v3(3);
-	Vertice G1v4(4);
-	Vertice G1v5(5);
-	Vertice G1v6(6);
-	Vertice G1v7(7);
-	Vertice G1v8(8);
-	Grafo G1(9);
-	G1.adiciona_aresta(&G1v0, &G1v3);
-	G1.adiciona_aresta(&G1v0, &G1v4);
-	G1.adiciona_aresta(&G1v0, &G1v7);
-	G1.adiciona_aresta(&G1v1, &G1v2);
-	G1.adiciona_aresta(&G1v1, &G1v6);
-	G1.adiciona_aresta(&G1v2, &G1v6);
-	G1.adiciona_aresta(&G1v3, &G1v5);
-	G1.adiciona_aresta(&G1v3, &G1v4);
-	G1.adiciona_aresta(&G1v3, &G1v8);
-	G1.adiciona_aresta(&G1v4, &G1v8);
-	G1.adiciona_aresta(&G1v5, &G1v7);
-	G1.adiciona_aresta(&G1v6, &G1v7);
-	G1.colore_grafo();
-	
-	cout << endl << "##################################################################" << endl;
-	cout << "GRAFO 2:" << endl;
-	Vertice G2v0(0);
-	Vertice G2v1(1);
-	Vertice G2v2(2);
-	Vertice G2v3(3);
-	Vertice G2v4(4);
-	Vertice G2v5(5);
-	Vertice G2v6(6);
-	Vertice G2v7(7);
-	Vertice G2v8(8);
-	Vertice G2v9(9);
-	Grafo G2(10);
-	G2.adiciona_aresta(&G2v0, &G2v1);
-	G2.adiciona_aresta(&G2v0, &G2v5);
-	G2.adiciona_aresta(&G2v2, &G2v3);
-	G2.adiciona_aresta(&G2v2, &G2v5);
-	G2.adiciona_aresta(&G2v2, &G2v7);
-	G2.adiciona_aresta(&G2v4, &G2v1);
-	G2.adiciona_aresta(&G2v6, &G2v5);
-	G2.adiciona_aresta(&G2v6, &G2v7);
-	G2.adiciona_aresta(&G2v8, &G2v1);
-	G2.adiciona_vertice(&G2v9);
-	G2.colore_grafo();
-
+	Grafo G("fpsol2.i.1.col");
 	return 1;
 }
