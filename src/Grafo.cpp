@@ -103,6 +103,9 @@ void Grafo::calcula_saturacao(){
 }
 
 void Grafo::colore_grafo(){
+  time_t start, end;
+  time(&start);
+  ios_base::sync_with_stdio(false);
 	if(!eh_pseudografo()){
 		while(true){
 			calcula_saturacao();
@@ -129,8 +132,13 @@ void Grafo::colore_grafo(){
 				}
 			}
 		}
+    time(&end);
 	//imprime_lista_colorida();
     imprime_vertices();
+    double time_taken = double(end - start);
+    cout << "Tempo para colorir o grafo: " << fixed
+         << time_taken << setprecision(7);
+    cout << " seg " << endl;
 	}	
 }
 
