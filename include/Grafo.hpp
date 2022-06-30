@@ -8,6 +8,8 @@
 #include <string>
 #include <sstream>
 #include "Vertice.hpp"
+#include <time.h>
+#include <iomanip>
 
 class Grafo {
 private:
